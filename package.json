@@ -1,0 +1,19 @@
+{
+  "name": "reporting_failures_app",
+  "version": "1.0.0",
+  "description": "Simple app for reporting equipment failures in the rooms at the Cracow University of Technology",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheRobOne/reporting_failures_app.git"
+  },
+  "author": "Maciej Rusek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheRobOne/reporting_failures_app/issues"
+  },
+  "homepage": "https://github.com/TheRobOne/reporting_failures_app#readme"
+}
