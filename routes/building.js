@@ -3,28 +3,28 @@ const router = express.Router();
 
 let Building = require('../models/building');
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
     Building.getBuildigns((err, buildings) => {
         if(err) throw err;
         res.json(buildings);
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
     Building.getBuildingById(req.params.id, (err, building) => {
         if(err) throw err;
         res.json(building);
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
     Building.addBuilding(req.body, (err, building) => {
         if(err) throw err;
         res.json(building);
     });
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
     Building.updateBuilding(req.params.id, req.body, (err, building) => {
         if(err) throw err;
         Building.getBuildingById(req.params.id, (err, building) => {
@@ -34,7 +34,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
     Building.removeBuilding(req.params.id, (err, building) => {
         if(err) throw err;
         res.json({"message": "delete successfuly"});

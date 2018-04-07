@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
 
@@ -10,6 +11,9 @@ const db = mongoose.connection;
 
 //body parser middleware
 app.use(bodyParser.json());
+
+//cors middleware
+app.use(cors());
 
 //route files
 let buildings = require('./routes/building');
