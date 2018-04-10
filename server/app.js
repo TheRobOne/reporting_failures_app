@@ -22,8 +22,6 @@ let rooms = require('./routes/room');
 app.use('/rooms', rooms);
 let failures = require('./routes/failure');
 app.use('/failures', failures);
-let failuresTypes = require('./routes/failures_type');
-app.use('/failures_types', failuresTypes);
 
 app.listen(3000, () => {
     console.log('====================================');
