@@ -4,6 +4,10 @@ const roomSchema = new mongoose.Schema({
     number: {
         type: String,
         required: true
+    },
+    building: {
+        type: String,
+        required: true
     }
 });
 
