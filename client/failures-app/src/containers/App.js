@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css'
 
-import Failure from '../components/Failure/Failure';
+import NewFailure from '../components/NewFailure/NewFailure';
 import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer';
 
 class App extends Component {
 
@@ -12,7 +13,9 @@ class App extends Component {
       <div className="App">
         <div className="container">
           <Navbar />
+          <NewFailure />
         </div>
+        <Footer />
       </div>
     );
   }
