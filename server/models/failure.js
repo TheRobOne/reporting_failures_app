@@ -1,7 +1,19 @@
 const mongoose = require('mongoose');
 
 const fauilureSchema = new mongoose.Schema({
-    number: {
+    roomNumber: {
+        type: String,
+        required: true
+    },
+    building: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    authorEmail: {
         type: String,
         required: true
     }
