@@ -1,33 +1,42 @@
 import React, { Component } from 'react';
 
 class Room extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             rooms: []
         };
     }
 
-    componentDidMount() {
-        fetch('http://localhost:3000/rooms')
+    fetchRooms() {
+        fetch(`http://localhost:3000/rooms/building/${this.props.building}`)
             .then((res) => {
                 return res.json()
             })
             .then(data => {
-                let rooms = '<select class="form-control">';
+                let rooms = '';
                 data.forEach(room => {
                     rooms += `
-                        <option>${room.number}</option>
+                        <option value="${room.number}">${room.number}</option>
                     `
                 })
-                rooms += '<select/>';
                 this.setState({ rooms });
             })
     }
 
+    componentDidMount() {
+        this.fetchRooms();
+    }
+
+    componentWillReceiveProps(){
+        this.fetchRooms();
+    }
+
     render() {
         return (
-            <div className="col" dangerouslySetInnerHTML={{ __html: this.state.rooms }}/>
+            <div className="col">
+                <select className="form-control" dangerouslySetInnerHTML={{ __html: this.state.rooms }}/>
+            </div>
         )
     }
 

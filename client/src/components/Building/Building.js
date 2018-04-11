@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 class Building extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             buildings: []
         };
@@ -14,21 +14,21 @@ class Building extends Component {
                 return res.json()
             })
             .then(data => {
-                let buildings = `<select class="form-control">`;
+                let buildings = '';
                 data.forEach(building => {
                     buildings += `
-                        <option>${building.name}</option>
+                        <option value=${building.name}>${building.name}</option>
                     `
                 })
-                buildings += '</select>';
-                console.log(buildings)
                 this.setState({ buildings });
             })
     }
 
     render() {
         return (
-            <div className="col" dangerouslySetInnerHTML={{ __html: this.state.buildings }} />
+            <div className="col">
+                <select className="form-control" onChange={this.props.onChangeHandler} dangerouslySetInnerHTML={{ __html: this.state.buildings }} />
+            </div> 
         )
     }
 

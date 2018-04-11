@@ -3,7 +3,7 @@ import './Navbar.css';
 
 const navbar = () => (
     <nav className="navbar navbar-expand-md topnav">
-        <a class="navbar-brand active" href="#addFailure">Dodaj</a>
+        <a className="navbar-brand active" href="#addFailure">Dodaj</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>
