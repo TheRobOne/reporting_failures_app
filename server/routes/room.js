@@ -17,6 +17,13 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
+router.get('/building/:name', (req, res, next) => {
+    Room.getRoomsByBuilding(req.params.name, (err, rooms) => {
+        if(err) throw err;
+        res.json(rooms);
+    });
+});
+
 router.post('/', (req, res, next) => {
     Room.addRoom(req.body, (err, room) => {
         if(err) throw err;

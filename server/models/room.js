@@ -23,6 +23,14 @@ module.exports.getRoomById = (id, callback) => {
     Room.findById(id, callback);
 };
 
+//get Rooms by building
+module.exports.getRoomsByBuilding = (building, callback) => {
+    let query = {
+        building: building
+    }
+    Room.find(query, callback);
+};
+
 //add new Room
 module.exports.addRoom = (room, callback) => {
     Room.create(room, callback);
