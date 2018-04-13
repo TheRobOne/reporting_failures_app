@@ -8,8 +8,9 @@ class Room extends Component {
         };
     }
 
-    fetchRooms() {
-        fetch(`http://localhost:3000/rooms/building/${this.props.building}`)
+    fetchRooms(props) {
+        const { building } = props || this.props;
+        fetch(`http://localhost:3000/rooms/building/${building}`)
             .then((res) => {
                 return res.json()
             })
@@ -28,8 +29,10 @@ class Room extends Component {
         this.fetchRooms();
     }
 
-    componentWillReceiveProps(){
-        this.fetchRooms();
+    componentWillReceiveProps(nextProps){
+        if(nextProps.building !== this.props.building) {
+            this.fetchRooms(nextProps);
+         }
     }
 
     render() {

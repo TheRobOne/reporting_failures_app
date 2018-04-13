@@ -13,8 +13,10 @@ class NewFailure extends Component {
   }
 
   onChangeHandler(event) {
-    this.setState({ building: event.target.value }, () => {});
+    this.setState({ building: event.target.value });
   }
+
+  
 
   render() {
     return (
