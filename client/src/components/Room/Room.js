@@ -38,7 +38,7 @@ class Room extends Component {
     render() {
         return (
             <div className="col">
-                <select className="form-control" dangerouslySetInnerHTML={{ __html: this.state.rooms }}/>
+                <select className="form-control" dangerouslySetInnerHTML={{ __html: this.state.rooms }} onChange={this.props.onChangeHandler}/>
             </div>
         )
     }

@@ -9,19 +9,34 @@ class NewFailure extends Component {
     super();
     this.state = {
       building: "A",
+      updatedBuilding: "",
       room: "",
+      updatedRoom: "",
       email: "",
       description: ""
     };
   }
 
   changeBuilding(event) {
-    this.setState({ building: event.target.value });
+    const newBuilding = event.target.value;
+    this.setState({ building: newBuilding }, newBuilding => {
+      this.updateBuilding(newBuilding);
+    });
+  }
+
+  updateBuilding(updatedBuilding) {
+    this.setState({ updatedBuilding });
   }
 
   changeRoom(event) {
-    console.log(this.state.room)
-    this.setState({ room: event.target.value });
+    const newRoom = event.target.value;
+    this.setState({ room: newRoom }, newRoom => {
+      this.updateRoom(newRoom);
+    });
+  }
+
+  updateRoom(updatedRoom) {
+    this.setState({ updatedRoom });
   }
 
   changeEmail(event) {
@@ -33,16 +48,6 @@ class NewFailure extends Component {
   }
 
   addNewFailure() {
-    console.log(
-      `roomNumber: ` +
-        this.state.room +
-        `building: ` +
-        this.state.building +
-        `description: ` +
-        this.state.description +
-        `authorEmail: ` +
-        this.state.email
-    );
     fetch("http://localhost:3000/failures", {
       method: "POST",
       headers: {
