@@ -23,8 +23,10 @@ app.use('/rooms', rooms);
 let failures = require('./routes/failure');
 app.use('/failures', failures);
 
-app.listen(3000, () => {
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => {
     console.log('====================================');
-    console.log('Server is running!');
+    console.log(`Server is running on port ${port}`);
     console.log('====================================');
 });

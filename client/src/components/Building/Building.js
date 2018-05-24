@@ -1,33 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getBuildings } from '../../actions/buildingActions';
 
 class Building extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            buildings: []
-        };
-    }
 
     componentDidMount() {
-        fetch('http://localhost:3000/buildings')
-            .then((res) => {
-                return res.json()
-            })
-            .then(data => {
-                let buildings = '';
-                data.forEach(building => {
-                    buildings += `
-                        <option value=${building.name}>${building.name}</option>
-                    `
-                })
-                this.setState({ buildings });
-            })
+        this.props.getBuildings();
     }
 
     render() {
+        const { buildings } = this.props.building;
+        let buildingItems;
+
+        buildingItems = buildings.map(building => (
+            <option key={building._id} value={building.name}>{building.name}</option>
+        ));
         return (
             <div className="col">
-                <select className="form-control" onChange={this.props.onChangeHandler} dangerouslySetInnerHTML={{ __html: this.state.buildings }} />
+                <select className="form-control" onChange={this.props.onChangeHandler}>
+                    {buildingItems}
+                </select>
             </div> 
         )
     }
@@ -35,4 +28,13 @@ class Building extends Component {
 
 }
 
-export default Building;
+Building.propTypes = {
+    getBuildings: PropTypes.func.isRequired,
+    building: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    building: state.building
+});
+
+export default connect(mapStateToProps, { getBuildings })(Building);

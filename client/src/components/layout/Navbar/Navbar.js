@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const navbar = () => (
     <nav className="navbar navbar-expand-md topnav">
-        <a className="navbar-brand active" href="#addFailure">Dodaj</a>
+        <Link className="navbar-brand active" to="/add-failure">Dodaj</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>
