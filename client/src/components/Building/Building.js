@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getBuildings } from '../../actions/buildingActions';
+import SelectList from '../common/SelectList';
 
 class Building extends Component {
 
@@ -18,9 +19,7 @@ class Building extends Component {
         ));
         return (
             <div className="col">
-                <select className="form-control" onChange={this.props.onChangeHandler}>
-                    {buildingItems}
-                </select>
+                <SelectList onChange={this.props.onChangeHandler} itemList={buildingItems}/>
             </div> 
         )
     }
