@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getRooms } from '../../actions/roomActions';
 
 class Room extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            rooms: []
-        };
-    }
 
     fetchRooms(props) {
         const { building } = props || this.props;
@@ -25,25 +22,38 @@ class Room extends Component {
             })
     }
 
-    componentDidMount() {
-        this.fetchRooms();
+    componentDidMount(){
+        this.props.getRooms(this.props.building);
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.building !== this.props.building) {
-            this.fetchRooms(nextProps);
+            this.props.getRooms(nextProps.building);
          }
     }
 
     render() {
+        const { rooms_list } = this.props.rooms_list;
+        let roomsListItem = rooms_list.map(room => (
+            <option key={room._id} value={room.number}>{room.number}</option>
+        ));
         return (
             <div className="col">
-                <select className="form-control" dangerouslySetInnerHTML={{ __html: this.state.rooms }} onChange={this.props.onChangeHandler}/>
+                <select className="form-control" onChange={this.props.onChangeHandler}>
+                   {roomsListItem}
+                </select>
             </div>
         )
     }
-
-
 }
 
-export default Room;
+Room.propTypes = {
+    getRooms: PropTypes.func.isRequired,
+    rooms_list: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    rooms_list: state.room
+})
+
+export default connect(mapStateToProps, {getRooms})(Room);
