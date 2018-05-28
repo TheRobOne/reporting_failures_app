@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 }
 
 SelectList.propTypes = {
-    itemList: PropTypes.object.isRequired,
+    itemList: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired
 }
 
