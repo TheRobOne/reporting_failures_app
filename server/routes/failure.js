@@ -20,7 +20,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
     Failure.addFailure(req.body, (err, failure) => {
         if(err) throw err;
-        res.json(failure);
+        res.json({"message": "failure added successfuly"});
     });
 })
 

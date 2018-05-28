@@ -6,23 +6,6 @@ import SelectList from '../common/SelectList';
 
 class Room extends Component {
 
-    fetchRooms(props) {
-        const { building } = props || this.props;
-        fetch(`http://localhost:3000/rooms/building/${building}`)
-            .then((res) => {
-                return res.json()
-            })
-            .then(data => {
-                let rooms = '';
-                data.forEach(room => {
-                    rooms += `
-                        <option value="${room.number}">${room.number}</option>
-                    `
-                })
-                this.setState({ rooms });
-            })
-    }
-
     componentDidMount(){
         this.props.getRooms(this.props.building);
     }
@@ -38,6 +21,7 @@ class Room extends Component {
         let roomsListItem = rooms_list.map(room => (
             <option key={room._id} value={room.number}>{room.number}</option>
         ));
+        
         return (
             <div className="col">
                 <SelectList onChange={this.props.onChangeHandler} itemList={roomsListItem}/>

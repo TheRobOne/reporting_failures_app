@@ -1,31 +1,39 @@
 import React, { Component } from "react";
 import Building from "../Building/Building";
 import Room from "../Room/Room";
+import { addFailure } from '../../actions/failureActions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import "./NewFailure.css";
 
 class NewFailure extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      building: "A",
-      updatedBuilding: "",
-      room: "",
-      updatedRoom: "",
-      email: "",
-      description: ""
+      building: 'A',
+      updatedBuilding: '',
+      room: '214',
+      updatedRoom: '',
+      email: '',
+      description: ''
     };
   }
 
   changeBuilding(event) {
     const newBuilding = event.target.value;
-    this.setState({ building: newBuilding }, newBuilding => {
+    let room = this.props.rooms_list;
+
+    this.setState({ building: newBuilding, room: room.rooms_list[0].number }, newBuilding => {
       this.updateBuilding(newBuilding);
     });
   }
 
   updateBuilding(updatedBuilding) {
-    this.setState({ updatedBuilding });
+    let room = this.props.rooms_list;
+
+    this.setState({ updatedBuilding, room: room.rooms_list[0].number });
   }
 
   changeRoom(event) {
@@ -47,25 +55,21 @@ class NewFailure extends Component {
     this.setState({ description: event.target.value });
   }
 
-  addNewFailure() {
-    fetch("http://localhost:3000/failures", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        roomNumber: this.state.room,
-        building: this.state.building,
-        description: this.state.description,
-        authorEmail: this.state.email
-      })
-    });
+  onSubmit(event) {
+    event.preventDefault();
+    let newFailure = {
+      roomNumber: this.state.room,
+      building: this.state.building,
+      description: this.state.description,
+      authorEmail: this.state.email
+    };
+
+    this.props.addFailure(newFailure, this.props.history);
   }
 
   render() {
     return (
-      <form className="new-failure-form">
+      <form className="new-failure-form" onSubmit={event => this.onSubmit(event)}>
         <div className="row">
           <div className="col">
             <label> Budynek: </label>
@@ -115,16 +119,19 @@ class NewFailure extends Component {
           </div>
         </div>
         <br />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          onClick={() => this.addNewFailure()}
-        >
-          Dodaj
-        </button>
+        <input type="submit" className="btn btn-info btn-block mt-4" value="Dodaj"/>
       </form>
     );
   }
 }
 
-export default NewFailure;
+NewFailure.propTypes = {
+  addFailure: PropTypes.func.isRequired,
+  rooms_list: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  rooms_list: state.room
+});
+
+export default connect(mapStateToProps, { addFailure })(withRouter(NewFailure));
