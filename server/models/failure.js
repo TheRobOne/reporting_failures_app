@@ -16,6 +16,10 @@ const fauilureSchema = new mongoose.Schema({
     authorEmail: {
         type: String,
         required: true
+    },
+    state: {
+        type: String,
+        default: 'nowy'
     }
 });
 

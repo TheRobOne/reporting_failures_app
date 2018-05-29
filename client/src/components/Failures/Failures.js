@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../common/Spinner';
 import { getFailures } from '../../actions/failureActions';
+import FailuresFeed from './FailuresFeed';
 
 class Failures extends Component {
   componentDidMount() {
@@ -11,8 +11,7 @@ class Failures extends Component {
 
   render() {
     const { failures } = this.props.failure;
-    let failureContent;
-    //console.log(failures)
+    let failureContent = <FailuresFeed failures={failures}/>
 
     return (
       <div>
