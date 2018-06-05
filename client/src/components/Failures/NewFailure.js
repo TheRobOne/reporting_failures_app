@@ -16,7 +16,7 @@ class NewFailure extends Component {
       updatedBuilding: '',
       room: '214',
       updatedRoom: '',
-      email: '',
+      email: this.props.user.email,
       description: ''
     };
   }
@@ -46,11 +46,7 @@ class NewFailure extends Component {
   updateRoom(updatedRoom) {
     this.setState({ updatedRoom });
   }
-
-  changeEmail(event) {
-    this.setState({ email: event.target.value });
-  }
-
+  
   changeDescription(event) {
     this.setState({ description: event.target.value });
   }
@@ -90,21 +86,6 @@ class NewFailure extends Component {
         <br />
         <div className="row">
           <div className="col">
-            <label> Adres Email: </label>
-          </div>
-          <div className="col">
-            <input
-              className="form-control"
-              type="text"
-              id="email"
-              value={this.state.email}
-              onChange={event => this.changeEmail(event)}
-            />
-          </div>
-        </div>
-        <br />
-        <div className="row">
-          <div className="col">
             <label> Opis usterki: </label>
           </div>
           <div className="col">
@@ -131,7 +112,8 @@ NewFailure.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  rooms_list: state.room
+  rooms_list: state.room,
+  user: state.auth.user
 });
 
 export default connect(mapStateToProps, { addFailure })(withRouter(NewFailure));

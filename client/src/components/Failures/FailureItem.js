@@ -32,7 +32,7 @@ class FailureItem extends Component {
         if(this.props.user.role === 'admin'){
             failureItem = (
                 <tr key={failure._id}>
-                    <th scope='row'>{this.props.index}</th>
+                    <th scope='row'>{this.props.index + 1}</th>
                     <td>{failure.building}</td>
                     <td>{failure.roomNumber}</td>
                     <td>{failure.authorEmail}</td>
@@ -58,7 +58,7 @@ class FailureItem extends Component {
         } else {
             failureItem = (
                 <tr key={failure._id}>
-                    <th scope='row'>{this.props.index}</th>
+                    <th scope='row'>{this.props.index + 1}</th>
                     <td>{failure.building}</td>
                     <td>{failure.roomNumber}</td>
                     <td>{failure.authorEmail}</td>
