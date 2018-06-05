@@ -119,7 +119,7 @@ class NewFailure extends Component {
           </div>
         </div>
         <br />
-        <input type="submit" className="btn btn-info btn-block mt-4" value="Dodaj"/>
+        <input type="submit" className="btn btn-info btn-block mt-4 submit" value="Dodaj"/>
       </form>
     );
   }
