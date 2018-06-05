@@ -16,10 +16,10 @@ const navbar = () => (
             </ul>
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item nav-right">
-                    <a className="nav-link" href="#login">Logowanie</a>
+                    <Link className="nav-link" to="/login">Logowanie</Link>
                 </li>
                 <li className="nav-item nav-right">
-                    <a className="nav-link" href="#register">Rejestracja</a>
+                    <Link className="nav-link" to="/register">Rejestracja</Link>
                 </li>
             </ul>
         </div>

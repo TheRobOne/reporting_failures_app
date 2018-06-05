@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const passport = require('passport');
 
 const app = express();
 
@@ -22,6 +23,8 @@ let rooms = require('./routes/room');
 app.use('/rooms', rooms);
 let failures = require('./routes/failure');
 app.use('/failures', failures);
+let users = require('./routes/user');
+app.use('/users', users);
 
 const port = process.env.PORT || 5000;
 
