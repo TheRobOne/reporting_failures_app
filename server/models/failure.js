@@ -43,7 +43,7 @@ module.exports.addFailure = (failure, callback) => {
 //update Failure
 module.exports.updateFailure = (id, failure, callback) => {
     let query = {
-        name: failure.name
+        state: failure.state
     };
     Failure.findByIdAndUpdate(id, query, callback);
 }

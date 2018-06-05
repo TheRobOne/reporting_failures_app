@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FailureItem from './FailureItem';
 
 class FailuresFeed extends Component {
   render() {
     const { failures } = this.props;
-    let failureItem = failures.map((failure, index) => 
-      <tr key={failure._id}>
-        <th scope='row'>{index}</th>
-        <td>{failure.building}</td>
-        <td>{failure.roomNumber}</td>
-        <td>{failure.authorEmail}</td>
-        <td>{failure.description}</td>
-        <td>{failure.state}</td>
-      </tr>
+    let failureItems = failures.map((failure, index) => 
+      <FailureItem failure={failure} user={this.props.user} index={index} key={index}/>
     );
-    
+
     return (
       <table className="table table-striped">
         <thead>
@@ -28,7 +22,7 @@ class FailuresFeed extends Component {
           </tr>
         </thead>
         <tbody>
-          {failureItem}
+          {failureItems}
         </tbody>
       </table>
     )

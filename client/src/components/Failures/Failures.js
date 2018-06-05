@@ -11,7 +11,7 @@ class Failures extends Component {
 
   render() {
     const { failures } = this.props.failure;
-    let failureContent = <FailuresFeed failures={failures}/>
+    let failureContent = <FailuresFeed failures={failures} user={this.props.user}/>
 
     return (
       <div>
@@ -27,7 +27,8 @@ Failures.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  failure: state.failure
+  failure: state.failure,
+  user: state.auth.user
 })
 
 export default connect(mapStateToProps, { getFailures })(Failures);

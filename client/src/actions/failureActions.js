@@ -26,6 +26,16 @@ export const addFailure = (failure, history) => dispatch => {
         .post('/failures', failure)
         .then(res => history.push('/'))
         .catch(err =>
-           console.log('blad')
+           console.log(err)
+        );
+}
+
+//update failure
+export const updateFailure = (id, failure, history) => dispatch => {
+    axios
+        .put('/failures/' + id, failure)
+        .then(res => history.push('/'))
+        .catch(err => 
+            console.log(err)
         );
 }
