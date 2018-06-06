@@ -20,6 +20,10 @@ const fauilureSchema = new mongoose.Schema({
     state: {
         type: String,
         default: 'nowy'
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 

@@ -5,10 +5,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
+    "chart.js": "^2.7.2",
     "classnames": "^2.2.5",
     "jwt-decode": "^2.2.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
+    "react-chartjs-2": "^2.7.2",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",

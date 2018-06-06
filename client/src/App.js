@@ -13,6 +13,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import store from './store';
 import Failures from './components/Failures/Failures';
+import Charts from './components/Charts/Charts';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -47,6 +48,7 @@ class App extends Component {
               <Route exact path="/add-failure" component={NewFailure} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/charts" component={Charts} />
               <Footer />
             </div>
           </div>
