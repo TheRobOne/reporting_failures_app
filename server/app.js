@@ -6,9 +6,14 @@ const passport = require('passport');
 
 const app = express();
 
+// DB Config
+const db = require('./config/keys').mongoURI;
+
 //connect to MongoDB
-mongoose.connect('mongodb://localhost/reporting_failures_app');
-const db = mongoose.connection;
+mongoose
+  .connect(db)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 
 //body parser middleware
 app.use(bodyParser.json());

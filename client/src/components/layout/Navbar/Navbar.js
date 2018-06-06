@@ -43,7 +43,7 @@ class Navbar extends Component {
                         <Link className="nav-link" to="/add-failure">Dodaj</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/plots">Wykresy</Link>
+                        <Link className="nav-link" to="/charts">Wykresy</Link>
                     </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">
