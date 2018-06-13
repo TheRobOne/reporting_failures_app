@@ -5,6 +5,7 @@ class BarChart extends Component {
     constructor(props){
         super(props);
         this.state = {
+            failures: {},
             january: 0,
             february: 0,
             march: 0,
@@ -48,13 +49,27 @@ class BarChart extends Component {
         }
     }
 
-    componentWillReceiveProps() {
-        const failures = this.props.failures;
-        console.log(failures)
+    
+
+    static getDerivedStateFromProps(props, state) {
+        const failures = props.failures;
+        console.log("failures")
         Object.values(failures).map(failure => {
             return this.getFailuresForEachMonth(failure);
         });
         this.setState({data: [this.state.january, this.state.february, this.state.march, this.state.april, this.state.may, this.state.june]})
+    }
+
+
+
+    componentWillReceiveProps() {
+        this.setState({failures: this.props.failures})
+        // const failures = this.props.failures;
+        // console.log(failures)
+        // Object.values(failures).map(failure => {
+        //     return this.getFailuresForEachMonth(failure);
+        // });
+        // this.setState({data: [this.state.january, this.state.february, this.state.march, this.state.april, this.state.may, this.state.june]})
     }
 
     render() {
