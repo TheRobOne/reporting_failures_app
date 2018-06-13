@@ -12,30 +12,13 @@ class FailuresFeed extends Component {
   }
   onClick(type) {
     const { failures } = this.props;
-    let sortedObjs = sortBy( failures, type );
-    let failureItems = sortedObjs.map((failure, index) => 
+    let sortedFailures = sortBy( failures, type );
+    let failureItems = sortedFailures.map((failure, index) => 
       <FailureItem failure={failure} user={this.props.user} index={index} key={index}/>
     );
     this.setState({failureItems});
     this.forceUpdate();
-    //console.log(this.state)
   }
-
-  // static getDerivedStateFromProps(props, state){
-  //   const { failures } = this.props;
-  //   let failureItems = failures.map((failure, index) => 
-  //     <FailureItem failure={failure} user={this.props.user} index={index} key={index}/>
-  //   );
-  //   this.setState({failureItems});
-  // }
-  
-  // componentWillReceiveProps(){
-  //   const { failures } = this.props;
-  //   let failureItems = failures.map((failure, index) => 
-  //     <FailureItem failure={failure} user={this.props.user} index={index} key={index}/>
-  //   );
-  //   this.setState({failureItems});
-  // }
 
   render() {
     let failureItemsFromProps = this.props.failures.map((failure, index) => 
