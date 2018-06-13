@@ -2,40 +2,12 @@ import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2';
 
 class BarChart extends Component {
-<<<<<<< HEAD
-=======
-    constructor(props){
-        super(props);
-        this.state = {
-            failures: {},
-            january: 0,
-            february: 0,
-            march: 0,
-            april: 0,
-            may: 0,
-            june: 0,
-            july: 0,
-            september: 0,
-            october: 0,
-            november: 0,
-            december: 0,
-            data: []
-        }
-    }
->>>>>>> 23c71384a01379ec65241997514415801fc3223e
 
     componentWillReceiveProps(nextProps){
         if(nextProps.data !== this.props.data) {
            this.setData(nextProps);
         }
     }
-
-<<<<<<< HEAD
-    setData(props) {
-        return props.data || this.props.data;
-=======
-    
-
     static getDerivedStateFromProps(props, state) {
         const failures = props.failures;
         console.log("failures")
@@ -43,11 +15,8 @@ class BarChart extends Component {
             return this.getFailuresForEachMonth(failure);
         });
         this.setState({data: [this.state.january, this.state.february, this.state.march, this.state.april, this.state.may, this.state.june]})
->>>>>>> 23c71384a01379ec65241997514415801fc3223e
     }
-
-
-
+    
     componentWillReceiveProps() {
         this.setState({failures: this.props.failures})
         // const failures = this.props.failures;

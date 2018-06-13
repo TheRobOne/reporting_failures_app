@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFailures } from '../../actions/failureActions';
 import FailuresFeed from './FailuresFeed';
+import { sortBy } from 'underscore';
 
 class Failures extends Component {
   componentDidMount() {
@@ -11,7 +12,8 @@ class Failures extends Component {
 
   render() {
     const { failures } = this.props.failure;
-    let failureContent = <FailuresFeed failures={failures} user={this.props.user}/>
+    let sortedFailures = sortBy( failures, 'building' );
+    let failureContent = <FailuresFeed failures={sortedFailures} user={this.props.user}/>
 
     return (
       <div>
