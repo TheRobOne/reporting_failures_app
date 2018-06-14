@@ -10,6 +10,7 @@ class Navbar extends Component {
     onLogoutClick(e) {
         e.preventDefault();
         this.props.logoutUser();
+        window.location.href = '/login';
       }
     
     render() {
@@ -25,7 +26,7 @@ class Navbar extends Component {
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item nav-right">
                         <a
-                        href=""
+                        href="/login"
                         onClick={this.onLogoutClick.bind(this)}
                         className="nav-link"
                         >
@@ -49,7 +50,7 @@ class Navbar extends Component {
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item nav-right">
                         <a
-                        href=""
+                        href="/login"
                         onClick={this.onLogoutClick.bind(this)}
                         className="nav-link"
                         >
