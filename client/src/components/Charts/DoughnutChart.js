@@ -6,7 +6,7 @@ class BarChart extends Component {
 
     render() {
         const data = {
-            labels: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec'],
+            labels: this.props.labels,
             datasets: [
                 {
                     label: 'Liczba usterek w miesiącu',
