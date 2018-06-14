@@ -12,7 +12,7 @@ class Failures extends Component {
 
   render() {
     const { failures } = this.props.failure;
-    let sortedFailures = sortBy( failures, 'building' );
+    let sortedFailures = sortBy( failures, 'date' );
     let failureContent = <FailuresFeed failures={sortedFailures} user={this.props.user}/>
 
     return (
