@@ -38,6 +38,16 @@ export const updateFailure = (id, failure, history) => dispatch => {
         );
 }
 
+//delete failure
+export const deleteFailure = (id, history) => dispatch => {
+    axios.delete(`/failures/${id}`)
+        .then(res => history.push('/'))
+        .catch(err => 
+            console.log(err)
+        );
+}
+
+//get failure by id
 export const getFailureById = id => dispatch => {
     axios.get(`/failures/${id}`)
         .then(res => {
