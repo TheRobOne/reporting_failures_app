@@ -30,6 +30,7 @@ class FailuresFeed extends Component {
         <thead>
           <tr>
             <th scope="col">#</th>
+            <th scope="col" onClick={() => this.onClick("date")} style={{cursor: 'pointer'}}>Data utworzenia</th>
             <th scope="col" onClick={() => this.onClick("building")} style={{cursor: 'pointer'}}>Budynek</th>
             <th scope="col"> Pokój</th>
             <th scope="col" onClick={() => this.onClick("authorEmail")} style={{cursor: 'pointer'}}>Email</th>

@@ -27,12 +27,17 @@ class FailureItem extends Component {
     
     render() {
         const { failure } = this.props;
+        let date = new Date(failure.date);
+        date = date.toISOString().slice(0,10).replace(/-/g,".");
+        failure.date = date;
+
         let failureItem = ''
 
         if(this.props.user.role === 'admin'){
             failureItem = (
                 <tr key={failure._id}>
                     <th scope='row'>{this.props.index + 1}</th>
+                    <td>{failure.date}</td>
                     <td>{failure.building}</td>
                     <td>{failure.roomNumber}</td>
                     <td>{failure.authorEmail}</td>
