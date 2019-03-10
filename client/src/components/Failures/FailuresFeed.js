@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FailureItem from './FailureItem';
 import { sortBy } from 'underscore';
+import { withRouter } from 'react-router-dom';
 
 class FailuresFeed extends Component {
   constructor(props){
@@ -10,11 +11,16 @@ class FailuresFeed extends Component {
       failureItems: null
     }
   }
+
+  moveToFailurePage(failureId) {
+    this.props.history.push(`/failure/${failureId}`);
+  }
+
   onClick(type) {
     const { failures } = this.props;
     let sortedFailures = sortBy( failures, type );
     let failureItems = sortedFailures.map((failure, index) => 
-      <FailureItem failure={failure} user={this.props.user} index={index} key={index}/>
+      <FailureItem failure={failure} moveToFailurePage={() => this.moveToFailurePage(failure._id)} index={index} key={index}/>
     );
     this.setState({failureItems});
     this.forceUpdate();
@@ -22,7 +28,7 @@ class FailuresFeed extends Component {
 
   render() {
     let failureItemsFromProps = this.props.failures.map((failure, index) => 
-      <FailureItem failure={failure} user={this.props.user} index={index} key={index}/>
+      <FailureItem failure={failure} moveToFailurePage={() => this.moveToFailurePage(failure._id)} index={index} key={index}/>
     );
     
     return (
@@ -50,4 +56,4 @@ FailuresFeed.propTypes = {
     failures: PropTypes.array.isRequired
 };
 
-export default FailuresFeed;
+export default (withRouter(FailuresFeed));
