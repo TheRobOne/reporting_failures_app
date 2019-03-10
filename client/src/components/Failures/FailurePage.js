@@ -18,7 +18,8 @@ class FailurePage extends Component {
             <h1 className="display-4">{this.props.failureById.description}</h1>
             <p className="lead">{this.props.failureById.description}</p>
             <p>{this.props.failureById.state}</p>
-            <a className="btn btn-primary btn-lg" href="#" role="button">Zmień stan usterki</a>
+            { this.props.user.role === 'admin' ? <a className="btn btn-primary" href="#" role="button">Zmień stan usterki</a>: null }
+            { this.props.user.email === this.props.failureById.authorEmail ? <a className="btn btn-danger" href="#" role="button">Usuń usterkę</a>: null }
         </div>
         )
     }
@@ -29,7 +30,8 @@ FailurePage.propTypes = {
   }
 
 const mapStateToProps = state => ({
-    failureById: state.failure.failureById
+    failureById: state.failure.failureById,
+    user: state.auth.user
   });
   
 export default connect(mapStateToProps, { getFailureById })(FailurePage);
