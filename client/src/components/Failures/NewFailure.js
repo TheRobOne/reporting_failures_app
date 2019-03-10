@@ -17,13 +17,14 @@ class NewFailure extends Component {
       room: '214',
       updatedRoom: '',
       email: this.props.user.email,
-      description: ''
+      description: '',
+      title: ''
     };
   }
 
   changeBuilding(event) {
     const newBuilding = event.target.value;
-    let room = this.props.rooms_list;
+    const room = this.props.rooms_list;
 
     this.setState({ building: newBuilding, room: room.rooms_list[0].number }, newBuilding => {
       this.updateBuilding(newBuilding);
@@ -31,7 +32,7 @@ class NewFailure extends Component {
   }
 
   updateBuilding(updatedBuilding) {
-    let room = this.props.rooms_list;
+    const room = this.props.rooms_list;
 
     this.setState({ updatedBuilding, room: room.rooms_list[0].number });
   }
@@ -47,17 +48,18 @@ class NewFailure extends Component {
     this.setState({ updatedRoom });
   }
   
-  changeDescription(event) {
-    this.setState({ description: event.target.value });
+  onChangeHandler(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   onSubmit(event) {
     event.preventDefault();
-    let newFailure = {
+    const newFailure = {
       roomNumber: this.state.room,
       building: this.state.building,
       description: this.state.description,
-      authorEmail: this.state.email
+      authorEmail: this.state.email,
+      title: this.state.title
     };
 
     this.props.addFailure(newFailure, this.props.history);
@@ -66,6 +68,21 @@ class NewFailure extends Component {
   render() {
     return (
       <form className="new-failure-form" onSubmit={event => this.onSubmit(event)}>
+        <div className="row">
+            <div className="col">
+              <label> Tytuł: </label>
+            </div>
+            <div className="col">
+              <input className="form-control" 
+                type="text" 
+                rows="4" 
+                cols="50" 
+                name="title" 
+                onChange={event => this.onChangeHandler(event)}
+              />
+            </div>
+          </div>
+          <br />
         <div className="row">
           <div className="col">
             <label> Budynek: </label>
@@ -95,7 +112,8 @@ class NewFailure extends Component {
               cols="50"
               id="description"
               value={this.state.description}
-              onChange={event => this.changeDescription(event)}
+              name="description"
+              onChange={event => this.onChangeHandler(event)}
             />
           </div>
         </div>

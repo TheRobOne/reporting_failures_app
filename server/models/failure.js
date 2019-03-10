@@ -9,6 +9,10 @@ const fauilureSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    title: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: true
@@ -19,7 +23,7 @@ const fauilureSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        default: 'nowy'
+        default: 'nowa'
     },
     date: {
         type: Date,
