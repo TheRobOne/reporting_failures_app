@@ -1,7 +1,8 @@
-import { GET_FAILURES } from '../actions/types';
+import { GET_FAILURES, GET_FAILURE_BY_ID } from '../actions/types';
 
 const initialState = {
-    failures: []
+    failures: [],
+    failureById: {}
 }
 
 export default function(state = initialState, action) {
@@ -11,6 +12,11 @@ export default function(state = initialState, action) {
                 ...state,
                 failures: action.payload
             }
+        case GET_FAILURE_BY_ID:
+            return {
+                ...state,
+                failureById: action.payload
+                }
         default:
             return state;
     }
