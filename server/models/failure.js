@@ -23,7 +23,7 @@ const fauilureSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        default: 'nowy'
+        default: 'nowa'
     },
     date: {
         type: Date,

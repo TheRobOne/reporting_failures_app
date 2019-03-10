@@ -18,7 +18,7 @@ const FailureItem = (props) => {
             <td>{failure.building}</td>
             <td>{failure.roomNumber}</td>
             <td>{failure.authorEmail}</td>
-            <td>{failure.description}</td>
+            <td>{failure.title}</td>
             <td>{failure.state}</td>
         </tr>
     );
