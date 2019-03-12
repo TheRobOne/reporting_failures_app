@@ -4,7 +4,11 @@ import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
-import './App.css'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import blueGrey from '@material-ui/core/colors/blueGrey';
+import cyan from '@material-ui/core/colors/cyan';
+import red from '@material-ui/core/colors/red';
 
 import NewFailure from './components/Failures/NewFailure';
 import Navbar from './components/layout/Navbar/Navbar';
@@ -35,29 +39,50 @@ if (localStorage.jwtToken) {
   }
 }
 
+const theme = createMuiTheme({
+  typography: {
+      useNextVariants: true,
+  },
+  palette: {
+    primary: blueGrey,
+    secondary: cyan,
+    error: red
+  },
+})
+
+const styles = theme => ({
+  container: {
+    marginLeft: 225,
+    marginRight: 225,
+  }
+});
+
 class App extends Component {
 
   render() {
+    const { classes } = this.props;
 
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
-            <div className="container"> 
-            <Navbar />
-              <Route exact path="/" component={Failures} />
-              <Route exact path="/add-failure" component={NewFailure} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/charts" component={Charts} />
-              <Route path="/failure/:id" component={FailurePage} />
+          <MuiThemeProvider theme={theme}>
+            <div className="App">
+              <Navbar />
+              <div className={classes.container}>
+                <Route exact path="/" component={Failures} />
+                <Route exact path="/add-failure" component={NewFailure} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/charts" component={Charts} />
+                <Route path="/failure/:id" component={FailurePage} />
+              </div>
               <Footer />
             </div>
-          </div>
+          </MuiThemeProvider>
         </Router>
       </Provider>
     );
   }
 }
 
-export default App;
+export default (withStyles(styles)(App));

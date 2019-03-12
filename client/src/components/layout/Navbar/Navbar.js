@@ -1,95 +1,128 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Link from '@material-ui/core/Link';
+
 import { logoutUser } from '../../../actions/authActions';
-import './Navbar.css';
+import LeftMenu from './LeftMenu';
+
+const styles = theme => ({
+    root: {
+      flexGrow: 1,
+      paddingLeft: 0,
+    },
+    grow: {
+      flexGrow: 1,
+    },
+    link: {
+        margin: theme.spacing.unit,
+        marginLeft: 0
+      },
+    contrastText: {
+        color: theme.palette.primary.contrastText
+    },
+    toolbar: theme.mixins.toolbar,
+    left: {
+        marginLeft: 200,
+        paddingLeft: 0,
+    },
+    adminLeft: {
+        marginLeft: 0,
+        paddingLeft: 0,
+    },
+    menuItemLeft: {
+        backgroundColor: theme.palette.secondary.dark,
+        padding: '13px 30px'
+    },
+    right: {
+        marginRight: 200,
+    },
+  });
 
 class Navbar extends Component {
+    state = {
+        isDrawerOpen: false
+      };
 
     onLogoutClick(e) {
         e.preventDefault();
         this.props.logoutUser();
         window.location.href = '/login';
-      }
+    }
+
+    toggleDrawer = (open) => () => {
+        this.setState({
+            isDrawerOpen: open,
+        });
+    };
     
     render() {
         const { isAuthenticated, user } = this.props.auth;
-
-        const basicUserLinks = (
-            <div className="collapse navbar-collapse" id="navbarCollapse">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/add-failure">Dodaj</Link>
-                    </li>
-                </ul>
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item nav-right">
-                        <a
-                        href="/login"
-                        onClick={this.onLogoutClick.bind(this)}
-                        className="nav-link"
-                        >
-                        Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        );
-
-        const adminUserLinks = (
-            <div className="collapse navbar-collapse" id="navbarCollapse">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/add-failure">Dodaj</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/charts">Wykresy</Link>
-                    </li>
-                </ul>
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item nav-right">
-                        <a
-                        href="/login"
-                        onClick={this.onLogoutClick.bind(this)}
-                        className="nav-link"
-                        >
-                        Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        );
+        const { classes } = this.props;
 
         const guestLinks = (
-            <div className="collapse navbar-collapse" id="navbarCollapse">
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item nav-right">
-                        <Link className="nav-link" to="/login">Logowanie</Link>
-                    </li>
-                    <li className="nav-item nav-right">
-                        <Link className="nav-link" to="/register">Rejestracja</Link>
-                    </li>
-                </ul>
-            </div>
+            <React.Fragment>
+                <Typography variant="h4" className={`${classes.grow} ${classes.left}`}>
+                    <Link color="inherit" component={RouterLink} className={`${classes.link} ${classes.menuItemLeft}`} to="/">Podgląd</Link>
+                </Typography>
+                <Typography variant="h6" className={`${classes.grow} ${classes.right}`} align="right">
+                    <Link component={RouterLink} className={`${classes.link} ${classes.contrastText}`}  to="/login">Logowanie</Link>
+                    <Link component={RouterLink} className={`${classes.link} ${classes.contrastText}`} to="/register">Rejestracja</Link>
+                </Typography>
+            </React.Fragment>
         );
 
-        let authLinks = '';
+        const authLinks = (
+            <React.Fragment>
+                <Typography variant="h4" className={`${classes.grow} ${classes.left}`}>
+                    <Link color="inherit" component={RouterLink} className={`${classes.link} ${classes.menuItemLeft}`} to="/">Podgląd</Link>
+                </Typography>
+                <Typography variant="h6" className={`${classes.grow} ${classes.right}`} align="right">
+                    <Link color="inherit" component={RouterLink} className={classes.link} to="/add-failure">Dodaj usterkę</Link>
+                    <Link className={`${classes.link} ${classes.contrastText}`} onClick={this.onLogoutClick.bind(this)} to="/login">Wyloguj</Link>
+                </Typography>
+            </React.Fragment>
+        );
 
-        if(user.role === 'admin'){
-            authLinks = adminUserLinks;
-        } else {
-            authLinks = basicUserLinks;
+        const adminLinks = (
+            <React.Fragment>
+                <IconButton className={`${classes.menuButton} ${classes.left}`}color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+                    <MenuIcon />
+                </IconButton>
+                <Typography variant="h4" className={`${classes.grow} ${classes.adminLeft}`}>
+                    <Link color="inherit" component={RouterLink} className={`${classes.link} ${classes.menuItemLeft}`} to="/">Podgląd</Link>
+                </Typography>
+                <Typography variant="h6" className={`${classes.grow} ${classes.right}`} align="right">
+                    <Link color="inherit" component={RouterLink} className={classes.link} to="/add-failure">Dodaj usterkę</Link>
+                    <Link className={`${classes.link} ${classes.contrastText}`} onClick={this.onLogoutClick.bind(this)} to="/login">Wyloguj</Link>
+                </Typography>
+            </React.Fragment>
+        );
+
+        let leftMenuLinks = null;
+
+        if(user.role === 'admin' || user.role === 'conservator'){
+            leftMenuLinks = adminLinks;
         }
 
         return(
-            <nav className="navbar navbar-expand-md topnav">
-                <Link className="navbar-brand active" to="/">Podgląd</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                {isAuthenticated ? authLinks : guestLinks}
-            </nav>
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                    { isAuthenticated ? leftMenuLinks: null }
+                    { isAuthenticated && user.role === 'basic' ? authLinks: null }
+                    { !isAuthenticated ? guestLinks: null }
+                    </Toolbar>
+                </AppBar>
+                <LeftMenu isDrawerOpen={this.state.isDrawerOpen} toggleDrawer={() => this.toggleDrawer()} userRole={user.role}/>
+            </div>
         );
     }
 }
@@ -103,6 +136,4 @@ Navbar.propTypes = {
     auth: state.auth
   });
 
-export default connect(mapStateToProps, { logoutUser })(
-    Navbar
-  );
+export default connect(mapStateToProps, { logoutUser })(withStyles(styles)(Navbar));
