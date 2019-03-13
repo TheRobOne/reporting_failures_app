@@ -16,36 +16,27 @@ class Navbar extends Component {
     render() {
         const { isAuthenticated, user } = this.props.auth;
 
-        const basicUserLinks = (
+        const authLinks = (
             <div className="collapse navbar-collapse" id="navbarCollapse">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/add-failure">Dodaj</Link>
+                        <Link className="nav-link" to="/add-failure">Dodaj usterkę</Link>
                     </li>
-                </ul>
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item nav-right">
-                        <a
-                        href="/login"
-                        onClick={this.onLogoutClick.bind(this)}
-                        className="nav-link"
-                        >
-                        Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        );
-
-        const adminUserLinks = (
-            <div className="collapse navbar-collapse" id="navbarCollapse">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/add-failure">Dodaj</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/charts">Wykresy</Link>
-                    </li>
+                    { user.role === 'conservator' || user.role === 'admin' ?
+                        <React.Fragment>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/charts">Wykresy</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/budynki">Budynki</Link>
+                            </li>
+                        </React.Fragment>: null
+                    }
+                    { user.role === 'admin' ?
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/users">Użytkownicy</Link>
+                        </li>: null
+                    }
                 </ul>
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item nav-right">
@@ -74,14 +65,6 @@ class Navbar extends Component {
             </div>
         );
 
-        let authLinks = '';
-
-        if(user.role === 'admin'){
-            authLinks = adminUserLinks;
-        } else {
-            authLinks = basicUserLinks;
-        }
-
         return(
             <nav className="navbar navbar-expand-md topnav">
                 <Link className="navbar-brand active" to="/">Podgląd</Link>
@@ -103,6 +86,4 @@ Navbar.propTypes = {
     auth: state.auth
   });
 
-export default connect(mapStateToProps, { logoutUser })(
-    Navbar
-  );
+export default connect(mapStateToProps, { logoutUser })(Navbar);
