@@ -63,7 +63,7 @@ class Register extends Component {
               </p>
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="Imie i Nazwisko"
+                  placeholder="Imię i Nazwisko"
                   name="name"
                   value={this.state.name}
                   onChange={this.onChange}

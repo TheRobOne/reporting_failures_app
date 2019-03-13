@@ -26,3 +26,23 @@ const UserSchema = new Schema({
 });
 
 module.exports = User = mongoose.model('users', UserSchema);
+
+//get Users
+module.exports.getUsers = (callback, limit) => {
+  User.find(callback).limit(limit);
+};
+
+//update User
+module.exports.updateUser = (id, user, callback) => {
+  const query = {
+      name: user.name,
+      email: user.email,
+      role: user.role
+  };
+  User.findByIdAndUpdate(id, query, callback);
+}
+
+//get User by id
+module.exports.getUserById = (id, callback) => {
+  User.findById(id, callback);
+};

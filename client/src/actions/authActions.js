@@ -17,6 +17,20 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
+// Update User
+export const updateUser = (userData, userId, history) => dispatch => {
+  console.log(userData);
+  axios
+    .put(`/users/${userId}`, userData)
+    .then(res => history.push(`/user/${userId}`))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Login - Get User Token
 export const loginUser = userData => dispatch => {
   axios
