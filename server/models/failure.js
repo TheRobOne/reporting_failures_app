@@ -26,6 +26,10 @@ const fauilureSchema = new mongoose.Schema({
         default: 'nowa'
     },
     date: {
+        type: String,
+        required: true
+    },
+    dateReal: {
         type: Date,
         default: Date.now
     }

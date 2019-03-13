@@ -5,9 +5,6 @@ import { withRouter } from 'react-router-dom';
 const FailureItem = (props) => {    
 
     const { failure } = props;
-    let date = new Date(failure.date);
-    date = date.toISOString().slice(0,10).replace(/-/g,".");
-    failure.date = date;
 
     const cursorStyle = {cursor: 'pointer'}
 

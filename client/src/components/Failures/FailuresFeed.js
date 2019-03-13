@@ -18,6 +18,7 @@ class FailuresFeed extends Component {
 
   onClick(type) {
     const { failures } = this.props;
+    if(type === "date") type = "dateReal";
     let sortedFailures = sortBy( failures, type );
     let failureItems = sortedFailures.map((failure, index) => 
       <FailureItem failure={failure} moveToFailurePage={() => this.moveToFailurePage(failure._id)} index={index} key={index}/>
@@ -27,7 +28,9 @@ class FailuresFeed extends Component {
   }
 
   render() {
-    let failureItemsFromProps = this.props.failures.map((failure, index) => 
+    const { failures } = this.props;
+    const sortedFailures = sortBy(failures, 'dateReal')
+    const failureItems = sortedFailures.map((failure, index) => 
       <FailureItem failure={failure} moveToFailurePage={() => this.moveToFailurePage(failure._id)} index={index} key={index}/>
     );
     
@@ -45,7 +48,7 @@ class FailuresFeed extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.failureItems === null ? failureItemsFromProps : this.state.failureItems}
+          {this.state.failureItems === null ? failureItems : this.state.failureItems}
         </tbody>
       </table>
     )

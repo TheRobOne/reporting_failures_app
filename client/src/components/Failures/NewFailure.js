@@ -54,12 +54,16 @@ class NewFailure extends Component {
 
   onSubmit(event) {
     event.preventDefault();
+    const date = new Date();
+    const dateArray = [date.getDate(), date.getMonth()+1, date.getFullYear()]
+
     const newFailure = {
       roomNumber: this.state.room,
       building: this.state.building,
       description: this.state.description,
       authorEmail: this.state.email,
-      title: this.state.title
+      title: this.state.title,
+      date: dateArray.join('.')
     };
 
     this.props.addFailure(newFailure, this.props.history);
