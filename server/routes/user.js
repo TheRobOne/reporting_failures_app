@@ -158,4 +158,15 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
   
 });
 
+// @route   DELETE users/:id
+// @desc    Delete user by id
+// @access  Private
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  User.removeUser(req.params.id, (err, user) => {
+    if(err) throw err;
+    res.json({"message": "delete successfuly"});
+  });
+  
+});
+
 module.exports = router;

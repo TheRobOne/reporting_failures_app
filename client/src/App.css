@@ -34,3 +34,9 @@
   padding-right: 0 !important;
   padding-bottom: 20px !important;
 }
+
+.btn-info {
+    background-color: #009688 !important;
+    border-color: #009688 !important;
+    color: white;
+}

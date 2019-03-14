@@ -46,3 +46,8 @@ module.exports.updateUser = (id, user, callback) => {
 module.exports.getUserById = (id, callback) => {
   User.findById(id, callback);
 };
+
+//remove User
+module.exports.removeUser = (id, callback) => {
+  User.findByIdAndRemove(id, callback);
+};

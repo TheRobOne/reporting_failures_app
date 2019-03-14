@@ -20,7 +20,7 @@ class UserPage extends Component {
 
     render() {
         return (
-            <UserPageForm onSubmit={this.onSubmit} onChange={this.onChange} user={this.props.userById} errors={this.props.errors}/>
+            <UserPageForm/>
         )
     }
 }

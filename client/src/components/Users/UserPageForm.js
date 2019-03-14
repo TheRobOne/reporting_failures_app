@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 
-import { updateUser } from '../../actions/authActions';
+import { updateUser, removeUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 
 
@@ -22,6 +22,7 @@ class UserPageForm extends Component  {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onChangeSelectedOption = this.onChangeSelectedOption.bind(this);
+        this.removeUser = this.removeUser.bind(this);
     }
 
     componentDidMount() {
@@ -89,6 +90,13 @@ class UserPageForm extends Component  {
         this.props.updateUser(updatedUser, userId, this.props.history);
     }
 
+    removeUser(e) {
+        e.preventDefault();
+        const userId = window.location.pathname.split('/')[2];
+
+        this.props.removeUser(userId, this.props.history);
+    }
+
 
     render(){
         return (
@@ -123,8 +131,9 @@ class UserPageForm extends Component  {
                                 <option>Administrator</option>
                             </select>
                         </div>
-                        <input type="submit" className="btn btn-info btn-block mt-4" value="Potwierdź"/>
+                        <input type="submit" className="btn btn-info btn-block mt-4 btn-lg" value="Potwierdź"/>
                     </form>
+                    <input type="submit" className="btn btn-danger btn-lg btn-block mt-4" value="Usuń użytkownika" onClick={this.removeUser}/>                   
                     </div>
                 </div>
                 </div>
@@ -141,4 +150,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { updateUser })(withRouter(UserPageForm));
+export default connect(mapStateToProps, { updateUser, removeUser })(withRouter(UserPageForm));
