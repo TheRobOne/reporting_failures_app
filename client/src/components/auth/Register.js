@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 
+import './Auth.css';
+
 class Register extends Component {
   constructor() {
     super();
@@ -93,7 +95,7 @@ class Register extends Component {
                   onChange={this.onChange}
                   error={errors.password2}
                 />
-                <input type="submit" className="btn btn-info btn-block mt-4 btn-lg" value="Zarejestruj"/>
+                <input type="submit" className="btn btn-info btn-block mt-4 btn-lg submit" value="Zarejestruj"/>
               </form>
             </div>
           </div>
