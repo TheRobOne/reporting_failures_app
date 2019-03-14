@@ -23,7 +23,7 @@ const fauilureSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        default: 'nowa'
+        default: 'Nowa'
     },
     date: {
         type: String,
@@ -55,7 +55,12 @@ module.exports.addFailure = (failure, callback) => {
 //update Failure
 module.exports.updateFailure = (id, failure, callback) => {
     const query = {
-        state: failure.state
+        state: failure.state,
+        title: failure.title,
+        authorMail: failure.authorMail,
+        description: failure.description,
+        building: failure.building,
+        roomNumber: failure.roomNumber
     };
     Failure.findByIdAndUpdate(id, query, callback);
 }
