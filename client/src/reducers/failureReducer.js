@@ -1,4 +1,4 @@
-import { GET_FAILURES, GET_FAILURE_BY_ID } from '../actions/types';
+import { GET_FAILURES } from '../actions/types';
 
 const initialState = {
     failures: [],
@@ -12,11 +12,6 @@ export default function(state = initialState, action) {
                 ...state,
                 failures: action.payload
             }
-        case GET_FAILURE_BY_ID:
-            return {
-                ...state,
-                failureById: action.payload
-                }
         default:
             return state;
     }

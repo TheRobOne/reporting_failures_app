@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_FAILURES, GET_FAILURE_BY_ID } from './types';
+import { GET_FAILURES } from './types';
 
 //get all failures
 export const getFailures = () => dispatch => {
@@ -44,23 +44,5 @@ export const deleteFailure = (id, history) => dispatch => {
         .then(res => history.push('/'))
         .catch(err => 
             console.log(err)
-        );
-}
-
-//get failure by id
-export const getFailureById = id => dispatch => {
-    axios.get(`/failures/${id}`)
-        .then(res => {
-            dispatch({
-                type: GET_FAILURE_BY_ID,
-                payload: res.data
-
-            })
-        })
-        .catch(err =>
-            dispatch({
-            type: GET_FAILURE_BY_ID,
-            payload: null
-            })
         );
 }

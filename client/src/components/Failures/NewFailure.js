@@ -79,14 +79,14 @@ class NewFailure extends Component {
               <label> Tytuł: </label>
             </div>
               <input className="form-control" 
-                type="text" 
-                rows="4" 
-                cols="50" 
-                name="title" 
-                onChange={event => this.onChangeHandler(event)}
+                  type="text" 
+                  rows="4" 
+                  cols="50" 
+                  name="title" 
+                  onChange={event => this.onChangeHandler(event)}
               />
-          </div>
-          <br />
+        </div>
+        <br />
         <div className="row">
           <div className="col">
             <label> Budynek: </label>
