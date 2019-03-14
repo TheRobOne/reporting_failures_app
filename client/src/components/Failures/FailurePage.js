@@ -23,7 +23,7 @@ class FailurePage extends Component {
             <h1 className="display-4">{this.props.failureById.description}</h1>
             <p className="lead">{this.props.failureById.description}</p>
             <p>{this.props.failureById.state}</p>
-            { this.props.user.role === 'admin' ? <a className="btn btn-primary" href="#" role="button">Zmień stan usterki</a>: null }
+            { this.props.user.role === 'admin' ? <a className="btn btn-primary" href="jsx-a11y/href-no-hash" role="button">Zmień stan usterki</a>: null }
             <br/>
             <br/>
             { this.props.user.email === this.props.failureById.authorEmail ? <a className="btn btn-danger" onClick={() => this.onClickHandler(this.props.failureById._id)} role="button">Usuń usterkę</a>: null }

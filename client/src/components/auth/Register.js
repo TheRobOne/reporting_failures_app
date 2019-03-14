@@ -63,7 +63,7 @@ class Register extends Component {
               </p>
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="Imie i Nazwisko"
+                  placeholder="Imię i Nazwisko"
                   name="name"
                   value={this.state.name}
                   onChange={this.onChange}
@@ -93,7 +93,7 @@ class Register extends Component {
                   onChange={this.onChange}
                   error={errors.password2}
                 />
-                <input type="submit" className="btn btn-info btn-block mt-4" value="Zarejestruj"/>
+                <input type="submit" className="btn btn-info btn-block mt-4 btn-lg" value="Zarejestruj"/>
               </form>
             </div>
           </div>

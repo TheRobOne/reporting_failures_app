@@ -4,16 +4,18 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
 const passport = require('passport');
+require('../config/passport')(passport)
 
 // Load Input Validation
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
+const validateUpdateInput = require('../validation/update');
 
 // Load User model
 const User = require('../models/user');
 
 
-// @route   POST api/users/register
+// @route   POST users/register
 // @desc    Register user
 // @access  Public
 router.post('/register', (req, res) => {
@@ -50,7 +52,7 @@ router.post('/register', (req, res) => {
   });
 });
 
-// @route   GET api/users/login
+// @route   POST users/login
 // @desc    Login User / Returning JWT Token
 // @access  Public
 router.post('/login', (req, res) => {
@@ -98,13 +100,22 @@ router.post('/login', (req, res) => {
   });
 });
 
-// @route   GET api/users/current
+// @route   GET users/all
+// @desc    Return all users
+// @access  Private
+router.get('/all', passport.authenticate('jwt', { session: false }), (req, res) => {
+  User.getUsers((err, failures) => {
+    if(err) throw err;
+    res.json(failures);
+  });
+});
+
+module.exports = router;
+
+// @route   GET users/current
 // @desc    Return current user
 // @access  Private
-router.get(
-  '/current',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({
       id: req.user.id,
       name: req.user.name,
@@ -112,5 +123,50 @@ router.get(
     });
   }
 );
+
+// @route   GET users/:id
+// @desc    get user by id
+// @access  Private
+router.get('/:id',  passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  User.getUserById(req.params.id, (err, failure) => {
+      if(err) throw err;
+      res.json(failure);
+  });
+});
+
+// @route   PUT users/:id
+// @desc    Update user by id
+// @access  Private
+router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const { errors, isValid } = validateUpdateInput(req.body);
+  
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const updatedUser = new User({
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role
+  });
+
+  User.updateUser(req.params.id, updatedUser, (err, user) => {
+    if(err) throw err;
+    res.json(user);
+  });
+  
+});
+
+// @route   DELETE users/:id
+// @desc    Delete user by id
+// @access  Private
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  User.removeUser(req.params.id, (err, user) => {
+    if(err) throw err;
+    res.json({"message": "delete successfuly"});
+  });
+  
+});
 
 module.exports = router;
