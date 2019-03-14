@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 
  const SelectList = ({
      itemList,
-     onChange
+     onChange,
+     value
  }) => {
   return (
     <div>
-        <select className="form-control" onChange={onChange}>
+        <select className="form-control" onChange={onChange} value={value}>
             {itemList}
         </select>
     </div>

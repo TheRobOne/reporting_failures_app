@@ -13,18 +13,14 @@
     margin-right: auto;
 }
 
-.new-failure-form textarea {
-    max-width:300px;
-}
-
 .new-failure-form .submit {
     background-color: #009688;
     color: white;
     border: none;
 }
 
-.new-failure-form .submit:hover {
-    background-color: #ddd;
+.new-failure-form:hover .submit:hover {
+    background-color: #ddd !important;
     color: black;
     text-decoration: none;
 }
