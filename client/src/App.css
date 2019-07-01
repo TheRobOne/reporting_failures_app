@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  min-height:100%;
 }
 
 .App-logo {
@@ -33,6 +32,10 @@
   padding-left: 0 !important;
   padding-right: 0 !important;
   padding-bottom: 20px !important;
+}
+
+main {
+  min-height: calc(100vh - 102px);
 }
 
 .btn-info {

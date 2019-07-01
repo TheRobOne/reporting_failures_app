@@ -35,7 +35,7 @@ class Charts extends Component {
     }
 
     getFailuresForEachMonth(failure){
-        let date = new Date(failure.date);
+        let date = new Date(failure.dateReal);
         let month = date.getMonth();
         switch(month) {
             case 0:
@@ -75,17 +75,22 @@ class Charts extends Component {
 
     getFailureState(failure){
         switch(failure.state) {
-            case 'nowy':
+            case 'Nowa':
                 this.setState(prevState => {
                     return {new: prevState.new + 1}
                 });
                 break;
-            case 'w trakcie':
+            case 'W trakcie naprawy':
                 this.setState(prevState => {
                     return {inprogress: prevState.inprogress + 1}
                 });
                 break;
-            case 'zakończony':
+            case 'Naprawiona':
+                this.setState(prevState => {
+                    return {done: prevState.done + 1}
+                });
+                break;
+            case 'Nie będzie naprawiana':
                 this.setState(prevState => {
                     return {done: prevState.done + 1}
                 });

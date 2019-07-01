@@ -17,6 +17,7 @@ import Charts from './components/Charts/Charts';
 import FailurePage from './components/Failures/FailurePage';
 import UsersPage from './components/Users/UsersPage';
 import UserPage from './components/Users/UserPage';
+import Logo from './components/Logo/Logo';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -45,18 +46,19 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <div className="container"> 
+              <Logo/>
               <Navbar />
-              <Route exact path="/" component={Failures} />
-              <Route exact path="/add-failure" component={NewFailure} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/charts" component={Charts} />
-              <Route exact path="/users" component={UsersPage} />
-              <Route path="/failure/:id" component={FailurePage} />
-              <Route path="/user/:id" component={UserPage} />
+              <main className="container main"> 
+                <Route exact path="/" component={Failures} />
+                <Route exact path="/add-failure" component={NewFailure} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/charts" component={Charts} />
+                <Route exact path="/users" component={UsersPage} />
+                <Route path="/failure/:id" component={FailurePage} />
+                <Route path="/user/:id" component={UserPage} />
+              </main>
               <Footer />
-            </div>
           </div>
         </Router>
       </Provider>

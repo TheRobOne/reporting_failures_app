@@ -45,7 +45,7 @@ class Navbar extends Component {
                         onClick={this.onLogoutClick.bind(this)}
                         className="nav-link"
                         >
-                        Logout
+                        Wyloguj
                         </a>
                     </li>
                 </ul>
@@ -55,7 +55,7 @@ class Navbar extends Component {
         const guestLinks = (
             <div className="collapse navbar-collapse" id="navbarCollapse">
                 <ul className="navbar-nav ml-auto">
-                    <li className="nav-item nav-right">
+                    <li className="nav-item">
                         <Link className="nav-link" to="/login">Logowanie</Link>
                     </li>
                     <li className="nav-item nav-right">
@@ -66,12 +66,13 @@ class Navbar extends Component {
         );
 
         return(
-            <nav className="navbar navbar-expand-md topnav">
-                <Link className="navbar-brand active" to="/">Podgląd</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                {isAuthenticated ? authLinks : guestLinks}
+            <nav className="navbar navbar-dark navbar-expand-md topnav">
+                <div className="nav-left">
+                    <Link className="navbar-brand active" to="/">Podgląd</Link></div>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    {isAuthenticated ? authLinks : guestLinks}
             </nav>
         );
     }

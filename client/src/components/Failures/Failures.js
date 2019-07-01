@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getFailures } from '../../actions/failureActions';
 import FailuresFeed from './FailuresFeed';
 import { sortBy } from 'underscore';
+import './Failures.css';
 
 class Failures extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class Failures extends Component {
     let failureContent = <FailuresFeed failures={sortedFailures} user={this.props.user}/>
 
     return (
-      <div>
+      <div className="elo">
         {failureContent}
       </div>
     )

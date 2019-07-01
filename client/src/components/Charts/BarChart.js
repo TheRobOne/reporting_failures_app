@@ -3,7 +3,6 @@ import {Bar} from 'react-chartjs-2';
 
 class BarChart extends Component {
 
-
     render() {
         const data = {
             labels: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec'],
