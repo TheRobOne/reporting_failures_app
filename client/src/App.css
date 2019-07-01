@@ -39,7 +39,19 @@ main {
 }
 
 .btn-info {
-    background-color: #009688 !important;
-    border-color: #009688 !important;
+    background-color: #07356b !important;
+    border-color: #07356b !important;
     color: white;
+}
+
+.btn-info:hover {
+  background-color: #941c2f !important;
+  border-color: #941c2f !important;
+  color: white;
+}
+
+.submit:hover {
+  background-color: #941c2f !important;
+  border-color: #941c2f !important;
+  color: white;
 }
