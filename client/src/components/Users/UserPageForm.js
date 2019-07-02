@@ -109,6 +109,7 @@ class UserPageForm extends Component  {
                         Edytuj pola, odpowiadające danym które chcesz zmienić
                     </p>
                     <form noValidate onSubmit={this.onSubmit}>
+                        <label>Imię i nazwisko</label>
                         <TextFieldGroup
                             placeholder="Imię i nazwisko"
                             name="name"
@@ -116,6 +117,7 @@ class UserPageForm extends Component  {
                             onChange={this.onChange}
                             error={this.props.errors.name}
                         />
+                        <label>Adres email</label>
                         <TextFieldGroup
                             placeholder="Adres email"
                             name="email"
@@ -124,6 +126,7 @@ class UserPageForm extends Component  {
                             onChange={this.onChange}
                             error={this.props.errors.email}
                         />
+                        <label>Rola</label>
                         <div className="form-group">
                             <select className={classnames('form-control form-control-lg')} id="select1" value={this.state.role} onChange={this.onChangeSelectedOption}>
                                 <option>Użytkownik podstawowy</option>

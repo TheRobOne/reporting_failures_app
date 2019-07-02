@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import User from './User';
+import './User.css';
 
 class UsersPage extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class UsersPage extends Component {
         );
 
         return (
-            <div>
+            <div className="table-container">
                 <table className="table table-striped">
                     <thead>
                     <tr>

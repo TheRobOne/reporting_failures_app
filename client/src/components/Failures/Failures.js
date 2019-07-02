@@ -17,7 +17,7 @@ class Failures extends Component {
     let failureContent = <FailuresFeed failures={sortedFailures} user={this.props.user}/>
 
     return (
-      <div className="elo">
+      <div className="failures-container">
         {failureContent}
       </div>
     )
