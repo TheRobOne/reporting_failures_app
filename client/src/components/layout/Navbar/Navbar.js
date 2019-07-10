@@ -28,7 +28,7 @@ class Navbar extends Component {
                                 <Link className="nav-link" to="/charts">Wykresy</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/budynki">Budynki</Link>
+                                <Link className="nav-link" to="/buildings">Budynki</Link>
                             </li>
                         </React.Fragment>: null
                     }

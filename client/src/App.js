@@ -18,6 +18,8 @@ import FailurePage from './components/Failures/FailurePage';
 import UsersPage from './components/Users/UsersPage';
 import UserPage from './components/Users/UserPage';
 import Logo from './components/Logo/Logo';
+import Buildings from './components/Buildings/Buildings';
+import BuildingPage from './components/Buildings/BuildingPage';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -55,8 +57,10 @@ class App extends Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/charts" component={Charts} />
                 <Route exact path="/users" component={UsersPage} />
+                <Route exact path="/buildings" component={Buildings} />
                 <Route path="/failure/:id" component={FailurePage} />
                 <Route path="/user/:id" component={UserPage} />
+                <Route path="/building/:id" component={BuildingPage} />
               </main>
               <Footer />
           </div>
