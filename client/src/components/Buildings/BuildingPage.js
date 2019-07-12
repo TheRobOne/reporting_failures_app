@@ -40,9 +40,21 @@ export default class BuildingPage extends Component {
 
         } else {
             const building = this.state.building;
-            building.rooms.push(newRoom);
+            building.rooms.push(parseInt(newRoom,10));
             this.setState({building: building});
         }
+    }
+
+    onClickSaveButton() {
+        const buildingId = window.location.pathname.split('/')[2];
+        const building = this.state.building;
+
+        console.log(building);
+        axios.put(`/buildings/${buildingId}`, { building })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+        })
     }
 
     render() {
@@ -58,6 +70,7 @@ export default class BuildingPage extends Component {
                 </ul>
                 <input type="number" onChange={e => this.onChangeInput(e.target.value)} className="form-control" placeholder="Dodaj nowe pomieszczenie" aria-label="Nowe" aria-describedby="basic-addon1"/>
                 <button type="button" className="btn btn-info" onClick={() => this.onClickAddButton()}>Dodaj</button>
+                <button type="button" className="btn btn-info" onClick={() => this.onClickSaveButton()}>Zapisz</button>
             </div>
         )
     }

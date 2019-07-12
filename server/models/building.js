@@ -4,7 +4,8 @@ const buildingSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
-    }
+    },
+    rooms: [Number]
 });
 
 let Building = module.exports = mongoose.model('Building', buildingSchema);
@@ -26,8 +27,9 @@ module.exports.addBuilding = (building, callback) => {
 
 //update building
 module.exports.updateBuilding = (id, building, callback) => {
-    let query = {
-        name: building.name
+    const query = {
+        name: building.name,
+        rooms: building.rooms
     };
     Building.findByIdAndUpdate(id, query, callback);
 }

@@ -25,7 +25,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.put('/:id', (req, res, next) => {
-    Building.updateBuilding(req.params.id, req.body, (err, building) => {
+    Building.updateBuilding(req.params.id, req.body.building, (err, building) => {
         if(err) throw err;
         Building.getBuildingById(req.params.id, (err, building) => {
             if(err) throw err;

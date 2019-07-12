@@ -22,13 +22,11 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //route files
-let buildings = require('./routes/building');
+const buildings = require('./routes/building');
 app.use('/buildings', buildings);
-let rooms = require('./routes/room');
-app.use('/rooms', rooms);
-let failures = require('./routes/failure');
+const failures = require('./routes/failure');
 app.use('/failures', failures);
-let users = require('./routes/user');
+const users = require('./routes/user');
 app.use('/users', users);
 
 const port = process.env.PORT || 5000;
