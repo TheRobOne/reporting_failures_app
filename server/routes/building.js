@@ -18,7 +18,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    Building.addBuilding(req.body, (err, building) => {
+    Building.addBuilding(req.body.building, (err, building) => {
         if(err) throw err;
         res.json(building);
     });

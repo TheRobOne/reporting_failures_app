@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 export default class Buildings extends Component {
@@ -42,7 +43,7 @@ export default class Buildings extends Component {
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Imię i Nazwisko</th>
+                        <th scope="col">Budynek</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,6 +52,9 @@ export default class Buildings extends Component {
                         }
                     </tbody>
                 </table>
+                <Link to="/new-building"> 
+                    <button type="button" className="btn btn-info">Dodaj budynek</button>
+                </Link>
             </div>
         )
     }

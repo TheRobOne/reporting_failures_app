@@ -20,6 +20,7 @@ import UserPage from './components/Users/UserPage';
 import Logo from './components/Logo/Logo';
 import Buildings from './components/Buildings/Buildings';
 import BuildingPage from './components/Buildings/BuildingPage';
+import NewBuilding from './components/Buildings/NewBuilding';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -58,6 +59,7 @@ class App extends Component {
                 <Route exact path="/charts" component={Charts} />
                 <Route exact path="/users" component={UsersPage} />
                 <Route exact path="/buildings" component={Buildings} />
+                <Route exact path="/new-building" component={NewBuilding} />
                 <Route path="/failure/:id" component={FailurePage} />
                 <Route path="/user/:id" component={UserPage} />
                 <Route path="/building/:id" component={BuildingPage} />

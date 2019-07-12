@@ -55,6 +55,9 @@ export default class BuildingPage extends Component {
             console.log(res);
             console.log(res.data);
         })
+
+        this.props.history.push('/buildings');
+        
     }
 
     render() {
@@ -70,6 +73,8 @@ export default class BuildingPage extends Component {
                 </ul>
                 <input type="number" onChange={e => this.onChangeInput(e.target.value)} className="form-control" placeholder="Dodaj nowe pomieszczenie" aria-label="Nowe" aria-describedby="basic-addon1"/>
                 <button type="button" className="btn btn-info" onClick={() => this.onClickAddButton()}>Dodaj</button>
+                <br/>
+                <br/>
                 <button type="button" className="btn btn-info" onClick={() => this.onClickSaveButton()}>Zapisz</button>
             </div>
         )
