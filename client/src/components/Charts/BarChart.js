@@ -5,15 +5,15 @@ class BarChart extends Component {
 
     render() {
         const data = {
-            labels: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec'],
+            labels: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
             datasets: [
                 {
                     label: 'Liczba usterek w miesiącu',
-                    backgroundColor: '#009688',
-                    borderColor: '#455A64',
+                    backgroundColor: '#FF9800',
+                    borderColor: '#E91E63',
                     borderWidth: 1,
-                    hoverBackgroundColor: '#009688',
-                    hoverBorderColor: '#455A64',
+                    hoverBackgroundColor: '#F57C00',
+                    hoverBorderColor: '#C2185B',
                     data: this.props.data
                 }
             ]

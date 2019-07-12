@@ -36,7 +36,7 @@ export default class BuildingPage extends Component {
 
     onClickAddButton() {
         const newRoom = this.state.newRoom;
-        if(newRoom == null || newRoom == 0){
+        if(newRoom === null || newRoom == 0){
 
         } else {
             const building = this.state.building;

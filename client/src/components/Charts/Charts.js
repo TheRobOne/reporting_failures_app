@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import BarChart from './BarChart';
 import DoughnutChart from './DoughnutChart';
+import { getFailures } from '../../actions/failureActions';
 import LineChart from './LineChart';
 
 class Charts extends Component {
@@ -16,6 +17,7 @@ class Charts extends Component {
             may: 0,
             june: 0,
             july: 0,
+            august: 0,
             september: 0,
             october: 0,
             november: 0,
@@ -23,9 +25,16 @@ class Charts extends Component {
             new: 0,
             inprogress: 0,
             done: 0,
+            wontfix: 0,
             chart: null
         }
     }
+
+
+    componentDidMount() {
+        this.props.getFailures();
+    }
+
     componentWillMount() {
         const failures = this.props.failures;
         for(let i = 0; i < failures.length; i++){
@@ -68,6 +77,36 @@ class Charts extends Component {
                     return {june: prevState.june + 1}
                 });
                 break;
+            case 6:
+                this.setState((prevState) => {
+                    return {july: prevState.july + 1}
+                });
+                break;
+            case 7:
+                this.setState((prevState) => {
+                    return {august: prevState.august + 1}
+                });
+                break;
+            case 8:
+                this.setState((prevState) => {
+                    return {september: prevState.september + 1}
+                });
+                break;
+            case 9:
+                this.setState((prevState) => {
+                    return {october: prevState.october + 1}
+                });
+                break;
+            case 10:
+                this.setState((prevState) => {
+                    return {november: prevState.november + 1}
+                });
+                break;
+            case 11:
+                this.setState((prevState) => {
+                    return {december: prevState.december + 1}
+                });
+                break;
             default:
                 console.log("default")
         }
@@ -92,7 +131,7 @@ class Charts extends Component {
                 break;
             case 'Nie będzie naprawiana':
                 this.setState(prevState => {
-                    return {done: prevState.done + 1}
+                    return {wontfix: prevState.wontfix + 1}
                 });
                 break;
             default:
@@ -101,10 +140,11 @@ class Charts extends Component {
     }
 
     onClick(chartType){
-        const monthsData = [this.state.january, this.state.february, this.state.march, this.state.april, this.state.may, this.state.june];
-        const statesData = [this.state.new, this.state.inprogress, this.state.done];
+        const monthsData = [this.state.january, this.state.february, this.state.march, this.state.april, this.state.may, this.state.june,
+            this.state.july, this.state.august, this.state.september, this.state.november, this.state.december];
+        const statesData = [this.state.new, this.state.inprogress, this.state.done, this.state.wontfix];
         const months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec'];
-        const states = ['nowy', 'w trakcie', 'zakończony']
+        const states = ['nowy', 'w trakcie naprawy', 'naprawa zakończona', 'nie będzie naprawiana']
         switch(chartType) {
             case "bar":
                 this.setState({chart: <BarChart data={monthsData}/>})
@@ -126,17 +166,12 @@ class Charts extends Component {
     render() {
         return (
             <div>
+                <br/>
                 <div className="btn-group mr-2" role="group" aria-label="First group">
-                    <button type="button" className="btn btn-secondary" onClick={() => this.onClick("bar")}>Słupkowy</button>
-                </div>
-                <div className="btn-group mr-2" role="group" aria-label="Second group">
-                    <button type="button" className="btn btn-secondary" onClick={() => this.onClick("doughnut")}>Kołowy</button>
-                </div>
-                <div className="btn-group mr-2" role="group" aria-label="Third group">
-                    <button type="button" className="btn btn-secondary" onClick={() => this.onClick("line")}>Liniowy</button>
+                    <button type="button" className="btn btn-info" onClick={() => this.onClick("bar")}>Usterki w miesiącu</button>
                 </div>
                 <div className="btn-group" role="group" aria-label="Fourth group">
-                    <button type="button" className="btn btn-secondary" onClick={() => this.onClick("status")}>Status usterek</button>
+                    <button type="button" className="btn btn-info" onClick={() => this.onClick("status")}>Status usterek</button>
                 </div>
                 {this.state.chart}
             </div>
@@ -152,4 +187,4 @@ const mapStateToProps = state => ({
     failures: state.failure.failures
 });
 
-export default connect(mapStateToProps, { })(Charts);
+export default connect(mapStateToProps, {getFailures})(Charts);
