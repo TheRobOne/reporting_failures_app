@@ -48,7 +48,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-              <Logo/>
+              <Logo />
               <Navbar />
               <main className="container main"> 
                 <Route exact path="/" component={Failures} />

@@ -68,7 +68,8 @@ class Navbar extends Component {
         return(
             <nav className="navbar navbar-dark navbar-expand-md topnav">
                 <div className="nav-left">
-                    <Link className="navbar-brand active" to="/">Podgląd</Link></div>
+                    <Link className="navbar-brand active" to="/">Podgląd</Link>
+                </div>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
