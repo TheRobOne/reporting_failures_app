@@ -21,6 +21,7 @@ import Logo from './components/Logo/Logo';
 import Buildings from './components/Buildings/Buildings';
 import BuildingPage from './components/Buildings/BuildingPage';
 import NewBuilding from './components/Buildings/NewBuilding';
+import Profile from './components/Profile/Profile';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -63,6 +64,7 @@ class App extends Component {
                 <Route path="/failure/:id" component={FailurePage} />
                 <Route path="/user/:id" component={UserPage} />
                 <Route path="/building/:id" component={BuildingPage} />
+                <Route path="/profile/:id" component={Profile} />
               </main>
               <Footer />
           </div>

@@ -39,6 +39,9 @@ class Navbar extends Component {
                     }
                 </ul>
                 <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <Link className="nav-link" to={`/profile/${user.id}`}>Profil</Link>
+                    </li>
                     <li className="nav-item nav-right">
                         <a
                         href="/login"

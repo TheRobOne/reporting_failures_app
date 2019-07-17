@@ -10,6 +10,7 @@ require('../config/passport')(passport)
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const validateUpdateInput = require('../validation/update');
+const validateChangePasswordInput = require('../validation/change-password');
 
 // Load User model
 const User = require('../models/user');
@@ -128,9 +129,9 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 // @desc    get user by id
 // @access  Private
 router.get('/:id',  passport.authenticate('jwt', { session: false }), (req, res, next) => {
-  User.getUserById(req.params.id, (err, failure) => {
+  User.getUserById(req.params.id, (err, user) => {
       if(err) throw err;
-      res.json(failure);
+      res.json(user);
   });
 });
 
@@ -138,24 +139,48 @@ router.get('/:id',  passport.authenticate('jwt', { session: false }), (req, res,
 // @desc    Update user by id
 // @access  Private
 router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-  const { errors, isValid } = validateUpdateInput(req.body);
-  
-  // Check Validation
-  if (!isValid) {
-    return res.status(400).json(errors);
+  if(req.body.hasOwnProperty('password')){
+    const { errors, isValid } = validateChangePasswordInput(req.body);
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    // retrieve the password field
+    let password = req.body.password
+
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(password, salt, (err, hash) => {
+        if (err) throw err;
+        req.body.password = hash
+
+        User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+          if(err) throw err;
+          res.json(user);
+        }); 
+      });
+    });
+
+  } else {
+    const { errors, isValid } = validateUpdateInput(req.body);
+    
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const updatedUser = new User({
+      name: req.body.name,
+      email: req.body.email,
+      role: req.body.role
+    });
+
+          console.log(updatedUser);
+    User.updateUser(req.params.id, updatedUser, (err, user) => {
+      if(err) throw err;
+      res.json(user);
+    });
   }
-
-  const updatedUser = new User({
-    name: req.body.name,
-    email: req.body.email,
-    role: req.body.role
-  });
-
-  User.updateUser(req.params.id, updatedUser, (err, user) => {
-    if(err) throw err;
-    res.json(user);
-  });
-  
 });
 
 // @route   DELETE users/:id
